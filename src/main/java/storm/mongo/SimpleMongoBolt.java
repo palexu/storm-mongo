@@ -1,12 +1,11 @@
 package storm.mongo;
 
-import java.util.Date;
-
-import backtype.storm.topology.OutputFieldsDeclarer;
-import backtype.storm.tuple.Tuple;
-
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
+import org.apache.storm.topology.OutputFieldsDeclarer;
+import org.apache.storm.tuple.Tuple;
+
+import java.util.Date;
 
 /**
  * A simple implementation of {@link MongoBolt} which attempts to map the input

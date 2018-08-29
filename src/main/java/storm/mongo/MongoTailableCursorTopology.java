@@ -1,24 +1,17 @@
 package storm.mongo;
 
-import static backtype.storm.utils.Utils.tuple;
+import com.mongodb.*;
+import org.apache.storm.Config;
+import org.apache.storm.LocalCluster;
+import org.apache.storm.topology.OutputFieldsDeclarer;
+import org.apache.storm.topology.TopologyBuilder;
+import org.apache.storm.tuple.Fields;
+import org.apache.storm.utils.Utils;
 
 import java.util.Date;
 import java.util.List;
 
-import backtype.storm.Config;
-import backtype.storm.LocalCluster;
-import backtype.storm.topology.OutputFieldsDeclarer;
-import backtype.storm.topology.TopologyBuilder;
-import backtype.storm.tuple.Fields;
-import backtype.storm.utils.Utils;
-
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
-import com.mongodb.Mongo;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoURI;
-import com.mongodb.ServerAddress;
+import static org.apache.storm.utils.Utils.tuple;
 
 /**
  * 
@@ -36,20 +29,18 @@ public class MongoTailableCursorTopology {
 	public static void main(String[] args) throws Exception {
 		
 		
-		// mongo stuff
+		// 准备 mongo 环境
         Mongo mongo = new MongoClient(new ServerAddress("localhost", 27017));
         mongo.dropDatabase("mongo_storm_tailable_cursor");
         final BasicDBObject options = new BasicDBObject("capped", true);
         options.put("size", 10000);
         mongo.getDB("mongo_storm_tailable_cursor").createCollection("test", options);
         final DBCollection coll = mongo.getDB("mongo_storm_tailable_cursor").getCollection("test");
-        
+
+        //建立拓扑
 		TopologyBuilder builder = new TopologyBuilder();
         MongoSpout spout = new MongoSpout("localhost", 27017, "mongo_storm_tailable_cursor", "test", new BasicDBObject()) {
 
-        	/**
-			 * Ugh.
-			 */
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -67,15 +58,14 @@ public class MongoTailableCursorTopology {
         };
         builder.setSpout("1", spout);
 
-        
         Config conf = new Config();
         conf.setDebug(true);
-        
-        
+
         LocalCluster cluster = new LocalCluster();
         
         cluster.submitTopology("test", conf, builder.createTopology());
-        
+
+        //mongo 写数据
         Runnable writer = new Runnable() {
 
 			@Override

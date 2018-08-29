@@ -11,12 +11,12 @@
   <description>Components for Storm integration with MongoDB</description>
 
   <dependencies>
-  	<dependency>
-  	  <groupId>storm</groupId>
-  	  <artifactId>storm</artifactId>
-  	  <version>0.9.0.1</version>
-  	  <scope>provided</scope>
-  	</dependency>
+    <dependency>
+      <groupId>org.apache.storm</groupId>
+      <artifactId>storm-core</artifactId>
+      <version>1.0.0</version>
+      <!--<scope>provided</scope>-->
+    </dependency>
     <dependency>
       <groupId>org.mongodb</groupId>
       <artifactId>mongo-java-driver</artifactId>
