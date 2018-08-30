@@ -29,6 +29,12 @@
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>26.0-jre</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -39,8 +45,8 @@
         <version>3.1</version>
         <configuration>
           <encoding>UTF-8</encoding>
-          <source>6</source>
-          <target>6</target>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
     </plugins>

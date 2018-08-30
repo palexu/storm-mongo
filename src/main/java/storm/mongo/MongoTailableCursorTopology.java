@@ -21,8 +21,8 @@ public class MongoTailableCursorTopology {
     public static void main(String... args) throws Exception {
         //建立拓扑
         TopologyBuilder builder = new TopologyBuilder();
-        AbstractMongoSpout spout = new MongoSpout("localhost", 27017, "mongo_storm_tailable_cursor", "test",
-                                                  new BasicDBObject());
+        AbstractTailableMongoSpout spout = new TailableMongoSpout("localhost", 27017, "mongo_storm_tailable_cursor", "test",
+                                                                  new BasicDBObject());
         builder.setSpout("1", spout);
 
         Config conf = new Config();

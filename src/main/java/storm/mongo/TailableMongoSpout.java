@@ -8,10 +8,10 @@ import java.util.List;
 
 import static org.apache.storm.utils.Utils.tuple;
 
-public class MongoSpout extends AbstractMongoSpout {
+public class TailableMongoSpout extends AbstractTailableMongoSpout {
     private static final long serialVersionUID = 1L;
 
-    public MongoSpout(String mongoHost, int mongoPort, String mongoDbName, String mongoCollectionName, DBObject query) {
+    public TailableMongoSpout(String mongoHost, int mongoPort, String mongoDbName, String mongoCollectionName, DBObject query) {
         super(mongoHost, mongoPort, mongoDbName, mongoCollectionName, query);
     }
 

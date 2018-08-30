@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * @author Dan Beaulieu <danjacob.beaulieu@gmail.com>
  */
-public abstract class AbstractMongoSpout extends BaseRichSpout {
+public abstract class AbstractTailableMongoSpout extends BaseRichSpout {
 
     private SpoutOutputCollector collector;
 
@@ -43,7 +43,7 @@ public abstract class AbstractMongoSpout extends BaseRichSpout {
     private final String mongoCollectionName;
 
 
-    public AbstractMongoSpout(String mongoHost, int mongoPort, String mongoDbName, String mongoCollectionName, DBObject query) {
+    public AbstractTailableMongoSpout(String mongoHost, int mongoPort, String mongoDbName, String mongoCollectionName, DBObject query) {
 
         this.mongoHost = mongoHost;
         this.mongoPort = mongoPort;
